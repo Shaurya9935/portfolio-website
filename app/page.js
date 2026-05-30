@@ -9,12 +9,25 @@ import SkillsPage from "./(main)/skills/page.js";
 export default function Home() {
   return (
     <div>
+      <div className="h-screen">
       <HomePage/>
-      <AboutPage/>
-      <SkillsPage/>
-      <ProjectPage/>
-      <BlogPage/>
-      <ContactPage/>
+      </div>
+      <div className="h-screen">
+        <AboutPage/>
+      </div>
+      <div className="h-screen">
+        <SkillsPage/>
+      </div>
+      <div className="h-screen">
+        <ProjectPage/>
+      </div>
+      <div className="h-screen">
+        <BlogPage/>
+      </div>
+      <div className="h-screen">
+        <ContactPage/>
+      </div>
+      
 
     </div>
   );
