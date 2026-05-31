@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
-import Sidebar from '@/component/sidebar/sidebar'
+import Sidebar from '@/component/sidebar/sidebar.js'
+import { createProject } from '@/actions/projectActions.js';
 
 const AdminProjects = () => {
   const initial = [
@@ -13,34 +14,8 @@ const AdminProjects = () => {
   const [projects, setProjects] = useState(initial)
   const [open, setOpen] = useState(false)
 
-  const [form, setForm] = useState({
-    title: '',
-    description: '',
-    tags: '',
-    status: 'IN DEVELOPMENT',
-    year: new Date().getFullYear(),
-    github: '',
-    live: '',
-  })
+ 
 
-  function handleChange(e) {
-    const { name, value } = e.target
-    setForm((s) => ({ ...s, [name]: value }))
-  }
-
-  function handleCreate(e) {
-    e.preventDefault()
-    const next = {
-      id: Date.now(),
-      title: form.title || 'Untitled',
-      tags: form.tags,
-      status: form.status,
-      year: form.year,
-    }
-    setProjects((p) => [next, ...p])
-    setOpen(false)
-    setForm({ title: '', description: '', tags: '', status: 'IN DEVELOPMENT', year: new Date().getFullYear(), github: '', live: '' })
-  }
 
   return (
     <div className="min-h-screen flex bg-black text-zinc-100">
@@ -69,30 +44,30 @@ const AdminProjects = () => {
             <div className="fixed inset-0 z-50 flex items-center justify-center">
               <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
 
-              <form onSubmit={handleCreate} className="relative z-50 w-180 max-w-[94%] bg-black border border-white/10 p-8 shadow-xl">
+              <form action={createProject} className="relative z-50 w-180 max-w-[94%] bg-black border border-white/10 p-8 shadow-xl">
                 <button type="button" onClick={() => setOpen(false)} className="absolute right-4 top-4 text-zinc-300">✕</button>
                 <h2 className="orbitron text-2xl text-white">New Project</h2>
 
                 <div className="mt-6 space-y-4">
                   <div>
                     <label className="font-terminal text-xs text-zinc-400">Project Title</label>
-                    <input name="title" value={form.title} onChange={handleChange} className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="Enter project title" />
+                    <input name="title" className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="Enter project title" />
                   </div>
 
                   <div>
                     <label className="font-terminal text-xs text-zinc-400">Description</label>
-                    <textarea name="description" value={form.description} onChange={handleChange} rows={4} className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="Enter project description" />
+                    <textarea name="description"  className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="Enter project description" />
                   </div>
 
                   <div>
                     <label className="font-terminal text-xs text-zinc-400">Tech Stack (comma separated)</label>
-                    <input name="tags" value={form.tags} onChange={handleChange} className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="React, Node.js, PostgreSQL" />
+                    <input name="tags" className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="React, Node.js, PostgreSQL" />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="font-terminal text-xs text-zinc-400">Status</label>
-                      <select name="status" value={form.status} onChange={handleChange} className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none">
+                      <select name="status" className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none">
                         <option>IN DEVELOPMENT</option>
                         <option>DEPLOYED</option>
                         <option>ARCHIVED</option>
@@ -101,18 +76,18 @@ const AdminProjects = () => {
 
                     <div>
                       <label className="font-terminal text-xs text-zinc-400">Year</label>
-                      <input name="year" value={form.year} onChange={handleChange} className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" />
+                      <input name="year" className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="font-terminal text-xs text-zinc-400">GitHub URL (optional)</label>
-                      <input name="github" value={form.github} onChange={handleChange} className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="https://github.com/..." />
+                      <input name="github" className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="https://github.com/..." />
                     </div>
                     <div>
                       <label className="font-terminal text-xs text-zinc-400">Live URL (optional)</label>
-                      <input name="live" value={form.live} onChange={handleChange} className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="https://..." />
+                      <input name="live" className="mt-2 w-full border border-white/6 bg-black/30 px-3 py-3 font-terminal text-sm text-white outline-none" placeholder="https://..." />
                     </div>
                   </div>
 
