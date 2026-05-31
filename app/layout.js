@@ -5,7 +5,9 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar/navbar";
+import Navbar from "@/component/Navbar/navbar";
+import Footer from "@/component/Footer/footer";
+
 
 
 const geistSans = Geist({
@@ -45,9 +47,10 @@ export default function RootLayout({ children }) {
         ${jetbrains.variable}
         h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col ">
         <Navbar/>
         {children}
+        <Footer/>
         </body>
     </html>
   );

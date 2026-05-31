@@ -8,27 +8,25 @@ import SkillsPage from "./(main)/skills/page.js";
 
 export default function Home() {
   return (
-    <div>
-      <div className="h-screen">
-      <HomePage/>
-      </div>
-      <div className="h-screen">
-        <AboutPage/>
-      </div>
-      <div className="h-screen">
-        <SkillsPage/>
-      </div>
-      <div className="h-screen">
-        <ProjectPage/>
-      </div>
-      <div className="h-screen">
-        <BlogPage/>
-      </div>
-      <div className="h-screen">
-        <ContactPage/>
-      </div>
-      
-
-    </div>
+    <main className="flex flex-col">
+      <section className="min-h-screen w-full py-12 lg:py-24">
+        <HomePage />
+      </section>
+      <section className="min-h-screen w-full py-12 lg:py-24">
+        <AboutPage />
+      </section>
+      <section className="min-h-screen w-full py-12 lg:py-24">
+        <SkillsPage />
+      </section>
+      <section className="min-h-screen w-full py-12 lg:py-24">
+        <ProjectPage />
+      </section>
+      <section className="min-h-screen w-full py-12 lg:py-24">
+        <BlogPage />
+      </section>
+      <section className="min-h-screen w-full py-12 lg:py-24">
+        <ContactPage />
+      </section>
+    </main>
   );
 }
