@@ -83,3 +83,32 @@ export async function GET() {
     );
   }
 }
+
+export async function DELETE(req) {
+    try {
+        await connectDB();
+        const { id } = await req.json();
+        await Project.findByIdAndDelete(id);
+    return Response.json({
+            success: true,
+            message: "Project deleted successfully"
+        },
+        {
+            status: 200
+        }
+    )
+    }catch (error) {
+        console.log(error); 
+
+        return Response.json(
+      {
+        success: false,
+        message: "Failed to delete project",
+      },
+      {
+        status: 500,
+      }
+    );
+    }
+}
+
