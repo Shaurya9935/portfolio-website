@@ -5,8 +5,8 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/component/Navbar/navbar";
-import Footer from "@/component/Footer/footer";
+import Navbar from "@/component/Navigation/navbar";
+import Footer from "@/component/Navigation/footer";
 
 
 

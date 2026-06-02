@@ -1,4 +1,4 @@
-import Sidebar from '@/component/sidebar/sidebar';
+import Sidebar from '@/component/Navigation/sidebar';
 import React from 'react'
 
 const AdminDashboard = () => {

@@ -112,3 +112,31 @@ export async function DELETE(req) {
     }
 }
 
+export async function PATCH(req) {
+    try {
+        await connectDB();
+        const { id, updatedData } = await req.json();
+        const project = await Project.findByIdAndUpdate(id, updatedData, { new: true });
+    return Response.json({
+            success: true,
+            message: "Project updated successfully",
+            data: project
+        },
+        {
+            status: 200
+        }
+    )
+    }catch (error) {
+        console.log(error);
+
+        return Response.json(
+      {
+        success: false,
+        message: "Failed to update project",
+      },
+      {
+        status: 500,
+      }
+    );
+    }
+}
