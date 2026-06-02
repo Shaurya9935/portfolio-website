@@ -9,7 +9,7 @@ const projectSchema = new mongoose.Schema({
     github: String,
     live: String,
     
-})
+}, {timestamps: true});
 
 export default mongoose.models.Project ||
   mongoose.model("Project", projectSchema);

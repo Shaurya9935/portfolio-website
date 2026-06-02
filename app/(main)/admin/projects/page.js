@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '@/component/sidebar/sidebar.js'
 import { createProject } from '@/actions/projectActions.js';
 
@@ -14,6 +14,26 @@ const AdminProjects = () => {
   const [projects, setProjects] = useState(initial)
   const [open, setOpen] = useState(false)
 
+useEffect(() => {
+  async function fetchProjects() {
+    try {
+      const response = await fetch("/api/projects");
+
+      const data = await response.json();
+
+      if (data.success) {
+        setProjects(data.data);
+      } else {
+        console.error("Failed to fetch projects");
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  fetchProjects();
+}, []);
  
 
 
@@ -113,7 +133,7 @@ const AdminProjects = () => {
 
               <tbody>
                 {projects.map((p, idx) => (
-                  <tr key={p.id} className={`group border-t border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.01),transparent)] hover:bg-white/3 transition-colors duration-200 ${idx % 2 === 0 ? 'bg-black/30' : ''}`}>
+                  <tr key={p._id} className={`group border-t border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.01),transparent)] hover:bg-white/3 transition-colors duration-200 ${idx % 2 === 0 ? 'bg-black/30' : ''}`}>
                     <td className="px-6 py-5 align-top">
                       <div className="font-terminal text-sm text-white">{p.title}</div>
                       <div className="mt-2 text-xs text-zinc-400">{p.tags}</div>
