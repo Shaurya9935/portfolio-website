@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/6 backdrop-blur-sm bg-black/30">
+    <header className="animate-nav-drop fixed inset-x-0 top-0 z-50 border-b border-white/6 bg-black/30 backdrop-blur-sm [animation-fill-mode:both]">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="flex h-20 items-center justify-between">
           <div className="logo orbitron font-bold text-2xl uppercase text-white">SHAURYA.DEV</div>

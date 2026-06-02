@@ -1,4 +1,7 @@
+"use client"
+
 import React from 'react'
+import { useState, useEffect } from 'react'
 
 const ProjectPage = () => {
   const projects = [
@@ -44,6 +47,29 @@ const ProjectPage = () => {
     },
   ]
 
+  const [viewProjects, setViewProjects] = useState([])
+
+  useEffect(() => {
+        async function fetchProjects() {
+            try {
+                const response = await fetch("/api/projects");
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setViewProjects(data.data);
+                } else {
+                    console.error("Failed to fetch projects");
+                }
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchProjects();
+    }, []);
+
   return (
     <div className="min-h-screen px-6 py-10 text-zinc-100 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-6xl">
@@ -56,9 +82,9 @@ const ProjectPage = () => {
         </h1>
 
         <div className="mt-10 space-y-6">
-          {projects.map((project) => (
+          {viewProjects.map((project) => (
             <article
-              key={project.id}
+              key={project._id}
               className="group relative overflow-hidden border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_16px_45px_rgba(0,0,0,0.42)] transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/4 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_22px_55px_rgba(0,0,0,0.55)] sm:p-6"
             >
               <div className={`pointer-events-none absolute inset-0 bg-linear-to-r ${project.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-100`} />
@@ -66,7 +92,7 @@ const ProjectPage = () => {
               <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-3xl">
                   <div className="font-terminal text-[11px] uppercase tracking-[0.35em] text-zinc-500">
-                    Mission #{project.id} // {project.year}
+                    Mission #{project._id} // {project.year}
                   </div>
 
                   <h2 className="orbitron mt-3 text-[clamp(1.5rem,3vw,2.45rem)] font-black leading-none text-white transition-transform duration-300 group-hover:translate-x-1">
